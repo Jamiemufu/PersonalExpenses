@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+
   final List<Transaction> transactions = [
     Transaction(
         id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()
@@ -24,6 +25,9 @@ class MyHomePage extends StatelessWidget {
         id: 't2', title: 'Monitor Stand', amount: 62.49, date: DateTime.now()
         ),
   ];
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +54,14 @@ class MyHomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Container(
-                        child: TextField(style: TextStyle(color: Colors.black, fontSize: 14),
+                        child: TextField(
+                          controller: titleController,
+                          style: TextStyle(color: Colors.black, fontSize: 14),
                           cursorColor: Colors.black,
                           decoration: InputDecoration(
                             labelText: 'Title',
                             contentPadding: EdgeInsets.all(0),
-                            enabledBorder: UnderlineInputBorder( borderSide: BorderSide(color: Colors.purple,)),
+                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.purple,)),
                             focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
                             labelStyle: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold,fontSize: 21,),
                           ),
@@ -63,7 +69,9 @@ class MyHomePage extends StatelessWidget {
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 15),
-                        child: TextField(style: TextStyle(color: Colors.black,fontSize: 14,),
+                        child: TextField(
+                          controller: amountController,
+                          style: TextStyle(color: Colors.black,fontSize: 14,),
                           cursorColor: Colors.purple,
                           decoration: InputDecoration(
                             labelText: 'Amount',
@@ -76,7 +84,10 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                       FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print(titleController.text);
+                          print(amountController.text);
+                        },
                         child: Text('Add Transaction'),
                         textColor: Colors.purple,
                       ),
