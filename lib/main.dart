@@ -33,29 +33,36 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter App'),
-        ),
-        // column contains children widgets
-        body: Column(
-            // column and rows are like flexbex - main axis and crossaxis
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              // you can wrap widgets in a parent such as container
-              // you can use this to set certain properties on that specific widget
-              Container(
-                width: double.infinity,
-                child: Card(
-                  color: Colors.blue,
-                  child: Text("CHART!"),
-                  elevation: 5,
+      appBar: AppBar(
+        title: Text('Flutter App'),
+      ),
+      // column contains children widgets
+      body: Column(
+        // column and rows are like flexbex - main axis and crossaxis
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          // you can wrap widgets in a parent such as container
+          // you can use this to set certain properties on that specific widget
+          Container(
+            width: double.infinity,
+            child: Card(
+              color: Colors.blue,
+              child: Text("CHART!"),
+              elevation: 5,
+            ),
+          ),
+          Column(
+            children: transactions.map((tx) {
+              return Card(
+                child: Text(
+                  tx.title
                 ),
-              ),
-              Card(
-                color: Colors.red,
-                child: Text("List of TX"),
-              ),
-            ]));
+              );
+            }).toList(),
+          )
+        ]
+      )
+    );
   }
 }
