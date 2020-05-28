@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:date_format/date_format.dart';
+import 'package:intl/intl.dart';
 
 import './transaction.dart';
 
@@ -30,11 +30,6 @@ class MyHomePage extends StatelessWidget {
         date: DateTime.now()
     ),
   ];
-
-  // quickly tidy the date
-  _tidyDate(date) {
-    return formatDate(date, [dd, '-', mm, '-', yy]);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +67,7 @@ class MyHomePage extends StatelessWidget {
                       padding: EdgeInsets.all(5),
                       width: 100,
                       child: Text(
-                        tx.amount.toString(),
+                        '£${tx.amount}',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -88,12 +83,12 @@ class MyHomePage extends StatelessWidget {
                           tx.title,
                           style: TextStyle(
                             fontSize: 15,
-                            color: Colors.purple,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          _tidyDate(tx.date),
+                         DateFormat.yMMMd().format(tx.date),
                           style: TextStyle(
                             fontSize: 11,
                             color: Colors.grey,
