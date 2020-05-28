@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:date_format/date_format.dart';
 
 import './transaction.dart';
 
@@ -30,11 +31,17 @@ class MyHomePage extends StatelessWidget {
     ),
   ];
 
+  // quickly tidy the date
+  _tidyDate(date) {
+    return formatDate(date, [dd, '-', mm, '-', yy]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
+        backgroundColor: Colors.purple,
+        title: Text('Personal Expenses'),
       ),
       // column contains children widgets
       body: Column(
@@ -55,9 +62,47 @@ class MyHomePage extends StatelessWidget {
           Column(
             children: transactions.map((tx) {
               return Card(
-                child: Text(
-                  tx.title
-                ),
+                child: Row(
+                  // inside this row we have a container and a column
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                      decoration: BoxDecoration(border: Border.all(color: Colors.purple, width: 2,)),
+                      padding: EdgeInsets.all(5),
+                      width: 100,
+                      child: Text(
+                        tx.amount.toString(),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple,
+                        ),
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          tx.title,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.purple,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          _tidyDate(tx.date),
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                )
               );
             }).toList(),
           )
