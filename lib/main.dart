@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
 import './models/transaction.dart';
+import './widgets/chart.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,15 +28,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //     id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()),
-    // Transaction(
-    //     id: 't2', title: 'Monitor Stand', amount: 62.49, date: DateTime.now()),
-    // Transaction(
-    //     id: 't3', title: 'Speakers', amount: 39.99, date: DateTime.now()),
-    // Transaction(
-    //     id: 't4', title: 'Gaming Mouse', amount: 89.99, date: DateTime.now()),
+    Transaction(
+        id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'Monitor Stand', amount: 62.49, date: DateTime.now()),
+    Transaction(
+        id: 't3', title: 'Speakers', amount: 39.99, date: DateTime.now()),
+    Transaction(
+        id: 't4', title: 'Gaming Mouse', amount: 89.99, date: DateTime.now()),
   ];
+
+  // getter used to calculate transactions in past 7 days
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   final titleController = TextEditingController();
   final amountController = TextEditingController();
@@ -90,28 +98,15 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               // you can wrap widgets in a parent such as container
               // you can use this to set certain properties on that specific widget
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(10),
-                child: Card(
-                  color: Theme.of(context).primaryColor,
-                  child: Container(
-                    padding: EdgeInsets.all(25),
-                    child: Text(
-                      "CHART!",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ))
-                    ),
-                  elevation: 5,
-                ),
-              ),
+              Chart(_recentTransactions),
               TransactionList(_userTransactions, _removeTransaction),
             ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add, ),
+        child: Icon(
+          Icons.add,
+        ),
         onPressed: () => _startAddNewTransaction(context),
       ),
     );
