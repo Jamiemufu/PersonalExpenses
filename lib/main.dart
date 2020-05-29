@@ -102,13 +102,13 @@ class _MyHomePageState extends State<MyHomePage> {
               TransactionList(_userTransactions, _removeTransaction),
             ]),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-        ),
-        onPressed: () => _startAddNewTransaction(context),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(
+      //     Icons.add,
+      //   ),
+      //   onPressed: () => _startAddNewTransaction(context),
+      // ),
     );
   }
 }
