@@ -10,7 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Personal Expenses',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+      ),
       home: MyHomePage(),
     );
   }
@@ -24,14 +27,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'Monitor Stand', amount: 62.49, date: DateTime.now()),
-    Transaction(
-        id: 't3', title: 'Speakers', amount: 39.99, date: DateTime.now()),
-    Transaction(
-        id: 't4', title: 'Gaming Mouse', amount: 89.99, date: DateTime.now()),
+    // Transaction(
+    //     id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()),
+    // Transaction(
+    //     id: 't2', title: 'Monitor Stand', amount: 62.49, date: DateTime.now()),
+    // Transaction(
+    //     id: 't3', title: 'Speakers', amount: 39.99, date: DateTime.now()),
+    // Transaction(
+    //     id: 't4', title: 'Gaming Mouse', amount: 89.99, date: DateTime.now()),
   ];
 
   final titleController = TextEditingController();
@@ -77,7 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () => _startAddNewTransaction(context),
           ),
         ],
-        backgroundColor: Colors.purple,
         title: Text('Personal Expenses'),
       ),
       // column contains children widgets
@@ -90,9 +92,17 @@ class _MyHomePageState extends State<MyHomePage> {
               // you can use this to set certain properties on that specific widget
               Container(
                 width: double.infinity,
+                padding: EdgeInsets.all(10),
                 child: Card(
-                  color: Colors.blue,
-                  child: Text("CHART!"),
+                  color: Theme.of(context).primaryColor,
+                  child: Container(
+                    padding: EdgeInsets.all(25),
+                    child: Text(
+                      "CHART!",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ))
+                    ),
                   elevation: 5,
                 ),
               ),
@@ -101,7 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.purple,
         child: Icon(Icons.add, ),
         onPressed: () => _startAddNewTransaction(context),
       ),

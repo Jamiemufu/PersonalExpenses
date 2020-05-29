@@ -22,7 +22,7 @@ class _NewTransactionState extends State<NewTransaction> {
     }
 
     widget.addNewTransaction(userTitle, userAmount);
-    Navigator.of(context).pop();  
+    Navigator.of(context).pop();
   }
 
   @override
@@ -39,19 +39,23 @@ class _NewTransactionState extends State<NewTransaction> {
                 // specifify controller to save input data
                 controller: titleController,
                 onSubmitted: (val) => submitData(),
-                style: TextStyle(color: Colors.black, fontSize: 14),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold),
                 cursorColor: Colors.black,
                 decoration: InputDecoration(
                   labelText: 'Title',
                   contentPadding: EdgeInsets.all(0),
                   enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                    color: Colors.purple,
+                    color: Theme.of(context).primaryColor,
                   )),
                   focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.purple)),
+                      borderSide:
+                          BorderSide(color: Theme.of(context).primaryColor)),
                   labelStyle: TextStyle(
-                    color: Colors.purple,
+                    color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 21,
                   ),
@@ -68,28 +72,38 @@ class _NewTransactionState extends State<NewTransaction> {
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
-                cursorColor: Colors.purple,
+
                 decoration: InputDecoration(
                     labelText: 'Amount',
                     prefixText: "£",
                     contentPadding: EdgeInsets.all(0),
                     enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.purple)),
+                        borderSide:
+                            BorderSide(color: Theme.of(context).primaryColor)),
                     focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.purple)),
+                        borderSide:
+                            BorderSide(color: Theme.of(context).primaryColor)),
                     labelStyle: TextStyle(
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 21,
                     )),
               ),
             ),
-            FlatButton(
-              onPressed: submitData,
-              child: Text('Add Transaction'),
-              textColor: Colors.purple,
-            ),
+            Container(
+              margin: EdgeInsets.only(top: 25),
+              child: RaisedButton(
+                elevation: 10,
+                onPressed: submitData,
+                color: Colors.purple,
+                child: Text(
+                  'Add Transaction',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            )
           ],
         ),
       ),
