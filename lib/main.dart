@@ -36,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         id: 't3', title: 'Speakers', amount: 39.99, date: DateTime.now()),
     Transaction(
         id: 't4', title: 'Gaming Mouse', amount: 89.99, date: DateTime.now()),
+        
   ];
 
   // getter used to calculate transactions in past 7 days
@@ -60,11 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(String title, double amount, DateTime chosenDate) {
     final newTx = Transaction(
         title: title,
         amount: amount,
-        date: DateTime.now(),
+        date: chosenDate,
         id: DateTime.now().toString());
 
     setState(() {
