@@ -5,16 +5,16 @@ import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> userTransactions;
+  final Function removeTransaction;
 
-  TransactionList(this.userTransactions);
+  TransactionList(this.userTransactions, this.removeTransaction);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 400,
-      child: ListView(
-        // for each transaction via map
-        children: userTransactions.map((tx) {
+      child: ListView.builder(
+        itemBuilder: (context, index) {
           return Card(
               child: Row(
             // inside this row we have a container and a column
@@ -30,7 +30,7 @@ class TransactionList extends StatelessWidget {
                 padding: EdgeInsets.all(5),
                 width: 100,
                 child: Text(
-                  '£${tx.amount}',
+                  '£${userTransactions[index].amount.toStringAsFixed(2)}',
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -44,7 +44,7 @@ class TransactionList extends StatelessWidget {
                   Container(
                     width: 225,
                     child: Text(
-                      tx.title,
+                      userTransactions[index].title,
                       style: TextStyle(
                           fontSize: 15,
                           color: Colors.black,
@@ -54,7 +54,7 @@ class TransactionList extends StatelessWidget {
                   Container(
                     width: 225,
                     child: Text(
-                      DateFormat.yMMMd().format(tx.date),
+                      DateFormat.yMMMd().format(userTransactions[index].date),
                       style: TextStyle(fontSize: 11, color: Colors.grey),
                     ),
                   ),
@@ -62,14 +62,23 @@ class TransactionList extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                    child: Icon(Icons.delete),
+                    child: IconButton(
+                        onPressed: () {
+                          removeTransaction(userTransactions[index].id);
+                        },
+                        icon: Icon(
+                      Icons.delete,
+                      color: Colors.black,
+                    )),
                     alignment: Alignment.bottomRight,
                     padding: EdgeInsets.only(right: 10)),
               )
             ],
           ));
-        }).toList(),
+        },
+        itemCount: userTransactions.length,
       ),
+        // for each transaction via map
     );
   }
 }
