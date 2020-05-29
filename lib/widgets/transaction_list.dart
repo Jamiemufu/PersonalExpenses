@@ -12,7 +12,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 450,
       child: userTransactions.isEmpty
           ? Column(
               children: <Widget>[
@@ -53,13 +53,15 @@ class TransactionList extends StatelessWidget {
                         width: 2,
                       )),
                       padding: EdgeInsets.all(5),
-                      width: 100,
-                      child: Text(
-                        '£${userTransactions[index].amount.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.purple),
+                      width: 75,
+                      child: FittedBox(
+                        child: Text(
+                          '£${userTransactions[index].amount.toStringAsFixed(2)}',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.purple),
+                        ),
                       ),
                     ),
                     Column(
@@ -100,7 +102,8 @@ class TransactionList extends StatelessWidget {
                           padding: EdgeInsets.only(right: 10)),
                     )
                   ],
-                ));
+                )
+                );
               },
               itemCount: userTransactions.length,
             ),
