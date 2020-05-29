@@ -94,7 +94,7 @@ class TransactionList extends StatelessWidget {
                               },
                               icon: Icon(
                                 Icons.delete,
-                                color: Colors.black,
+                                color: Theme.of(context).primaryColor,
                               )),
                           alignment: Alignment.bottomRight,
                           padding: EdgeInsets.only(right: 10)),
