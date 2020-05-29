@@ -66,6 +66,8 @@ class NewTransaction extends StatelessWidget {
             FlatButton(
               onPressed: () {
                 addNewTransaction(titleController.text, double.parse(amountController.text));
+                // hide keyboard afger pressing button
+                FocusScope.of(context).unfocus();
               },
               child: Text('Add Transaction'),
               textColor: Colors.purple,

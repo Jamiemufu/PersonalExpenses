@@ -11,8 +11,27 @@ class UserTransactions extends StatefulWidget {
 }
 
 class _UserTransactionsState extends State<UserTransactions> {
-
-    final List<Transaction> _userTransactions = [
+  final List<Transaction> _userTransactions = [
+    Transaction(
+        id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'Monitor Stand', amount: 62.49, date: DateTime.now()),
+    Transaction(
+        id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'Monitor Stand', amount: 62.49, date: DateTime.now()),
+    Transaction(
+        id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'Monitor Stand', amount: 62.49, date: DateTime.now()),
+        Transaction(
+        id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'Monitor Stand', amount: 62.49, date: DateTime.now()),
+    Transaction(
+        id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'Monitor Stand', amount: 62.49, date: DateTime.now()),
     Transaction(
         id: 't1', title: 'Monitor', amount: 142.99, date: DateTime.now()),
     Transaction(
@@ -20,13 +39,16 @@ class _UserTransactionsState extends State<UserTransactions> {
   ];
 
   void _addNewTransaction(String title, double amount) {
-    final newTx = Transaction(title: title, amount: amount, date: DateTime.now(), id: DateTime.now().toString());
+    final newTx = Transaction(
+        title: title,
+        amount: amount,
+        date: DateTime.now(),
+        id: DateTime.now().toString());
 
     setState(() {
       _userTransactions.add(newTx);
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
