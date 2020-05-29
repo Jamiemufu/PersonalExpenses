@@ -67,9 +67,9 @@ class TransactionList extends StatelessWidget {
                           removeTransaction(userTransactions[index].id);
                         },
                         icon: Icon(
-                      Icons.delete,
-                      color: Colors.black,
-                    )),
+                          Icons.delete,
+                          color: Colors.black,
+                        )),
                     alignment: Alignment.bottomRight,
                     padding: EdgeInsets.only(right: 10)),
               )
@@ -78,7 +78,7 @@ class TransactionList extends StatelessWidget {
         },
         itemCount: userTransactions.length,
       ),
-        // for each transaction via map
+      // for each transaction via map
     );
   }
 }
