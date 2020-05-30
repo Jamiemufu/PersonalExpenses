@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
 import './models/transaction.dart';
 import './widgets/chart.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  // force portrait mode
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -81,8 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    final appBar = AppBar(
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -90,17 +95,28 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
         title: Text('Personal Expenses'),
-      ),
+      );
+    return Scaffold(
+      appBar: appBar,
       // column contains children widgets
       body: SingleChildScrollView(
         child: Column(
             // column and rows are like flexbex - main axis and crossaxis
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               // you can wrap widgets in a parent such as container
               // you can use this to set certain properties on that specific widget
-              Chart(_recentTransactions),
-              TransactionList(_userTransactions, _removeTransaction),
+              Container(
+                height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.3,
+                child: Chart(_recentTransactions)
+              ),
+              Container(
+                height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - - MediaQuery.of(context).padding.top) * 0.63,
+                child: TransactionList(
+                  _userTransactions, _removeTransaction
+                  )
+                ),
             ]),
       ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
