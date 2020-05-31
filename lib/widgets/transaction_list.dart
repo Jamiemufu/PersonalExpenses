@@ -15,34 +15,34 @@ class TransactionList extends StatelessWidget {
       height: 450,
       child: userTransactions.isEmpty
           ? LayoutBuilder(builder: (context, contraints) {
-            return Column(
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.topLeft,
-                  padding:
-                      EdgeInsets.only(top: 5, left: 20, right: 0, bottom: 0),
-                  child: Text(
-                    "You currently have no personal expenses....",
-                    textAlign: TextAlign.left,
+              return Column(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.topLeft,
+                    padding:
+                        EdgeInsets.only(top: 5, left: 20, right: 0, bottom: 0),
+                    child: Text(
+                      "You currently have no personal expenses....",
+                      textAlign: TextAlign.left,
+                    ),
                   ),
-                ),
-                SizedBox(height: 50),
-                Opacity(
-                  opacity: 0.5,
-                  child: Container(
-                      height: contraints.maxHeight * 0.6,
-                      child: Image.asset(
-                        'assets/images/waiting.png',
-                        fit: BoxFit.cover,
-                      )),
-                ),
-              ],
-            );
-          })
+                  SizedBox(height: 50),
+                  Opacity(
+                    opacity: 0.5,
+                    child: Container(
+                        height: contraints.maxHeight * 0.6,
+                        child: Image.asset(
+                          'assets/images/waiting.png',
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                ],
+              );
+            })
           : ListView.builder(
               itemBuilder: (context, index) {
                 return SafeArea(
-                                  child: Card(
+                  child: Card(
                       child: Row(
                     // inside this row we have a container and a column
                     children: <Widget>[
@@ -86,7 +86,8 @@ class TransactionList extends StatelessWidget {
                             child: Text(
                               DateFormat.yMMMd()
                                   .format(userTransactions[index].date),
-                              style: TextStyle(fontSize: 11, color: Colors.grey),
+                              style:
+                                  TextStyle(fontSize: 11, color: Colors.grey),
                             ),
                           ),
                         ],
@@ -105,8 +106,7 @@ class TransactionList extends StatelessWidget {
                             padding: EdgeInsets.only(right: 10)),
                       )
                     ],
-                  )
-                  ),
+                  )),
                 );
               },
               itemCount: userTransactions.length,

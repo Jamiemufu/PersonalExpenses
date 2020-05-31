@@ -162,25 +162,24 @@ class _NewTransactionState extends State<NewTransaction> {
                                   ),
                                 ),
                               )),
-                              
                         ],
                       ),
                     ),
                     SafeArea(
                       child: RaisedButton(
-                          elevation: 10,
-                          onPressed: submitData,
-                          color: Colors.purple,
-                          child: Container(
-                            width: 105,
-                            child: FittedBox(
-                              child: Text(
-                                'Add Transaction',
-                                style: TextStyle(color: Colors.white),
-                              ),
+                        elevation: 10,
+                        onPressed: submitData,
+                        color: Colors.purple,
+                        child: Container(
+                          width: 105,
+                          child: FittedBox(
+                            child: Text(
+                              'Add Transaction',
+                              style: TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
+                      ),
                     ),
                   ],
                 ),

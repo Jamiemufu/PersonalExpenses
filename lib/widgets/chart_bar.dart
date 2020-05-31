@@ -13,6 +13,7 @@ class ChartBar extends StatelessWidget {
       builder: (ctx, con) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
                 height: con.maxHeight * 0.1,
@@ -51,7 +52,7 @@ class ChartBar extends StatelessWidget {
               ),
               SizedBox(height: con.maxHeight * 0.1),
               Container(
-                height: con.maxHeight * 0.2,
+                height: con.maxHeight * 0.1,
                 child: Text(
                   label,
                   style: TextStyle(
