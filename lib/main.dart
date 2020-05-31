@@ -156,12 +156,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
               if (isLandscape)
                 _showChart
-                    ? Container(
-                        height: (mediaQuery.size.height -
-                                appBar.preferredSize.height -
-                                mediaQuery.padding.top) *
-                            0.8,
-                        child: Chart(_recentTransactions))
+                    ? SafeArea(
+                                          child: Container(
+                          height: (mediaQuery.size.height -
+                                  appBar.preferredSize.height -
+                                  mediaQuery.padding.top) *
+                              0.8,
+                          child: Chart(_recentTransactions)),
+                    )
                     : txListWidget
             ]),
       ),
