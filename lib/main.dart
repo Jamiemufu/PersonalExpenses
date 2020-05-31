@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
-      isScrollControlled: true,
+        isScrollControlled: true,
         context: ctx,
         builder: (_) {
           return GestureDetector(
@@ -93,8 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
      */
 
     final mediaQuery = MediaQuery.of(context);
-    final isLandscape =
-        mediaQuery.orientation == Orientation.landscape;
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     final appBar = AppBar(
       actions: <Widget>[
@@ -157,13 +156,13 @@ class _MyHomePageState extends State<MyHomePage> {
               if (isLandscape)
                 _showChart
                     ? SafeArea(
-                                          child: Container(
-                          height: (mediaQuery.size.height -
-                                  appBar.preferredSize.height -
-                                  mediaQuery.padding.top) *
-                              0.8,
-                          child: Chart(_recentTransactions)),
-                    )
+                        child: Container(
+                            height: (mediaQuery.size.height -
+                                    appBar.preferredSize.height -
+                                    mediaQuery.padding.top) *
+                                0.8,
+                            child: Chart(_recentTransactions)),
+                      )
                     : txListWidget
             ]),
       ),
