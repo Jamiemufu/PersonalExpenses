@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
@@ -42,8 +41,9 @@ class _MyHomePageState extends State<MyHomePage> {
         id: 't3', title: 'Speakers', amount: 39.99, date: DateTime.now()),
     Transaction(
         id: 't4', title: 'Gaming Mouse', amount: 89.99, date: DateTime.now()),
-        
   ];
+
+  bool _showChart = false;
 
   // getter used to calculate transactions in past 7 days
   List<Transaction> get _recentTransactions {
@@ -57,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
+      isScrollControlled: true,
         context: ctx,
         builder: (_) {
           return GestureDetector(
@@ -87,15 +88,34 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    /**
+     * Widgets & Vars
+     */
+
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape =
+        mediaQuery.orientation == Orientation.landscape;
+
     final appBar = AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _startAddNewTransaction(context),
-          ),
-        ],
-        title: Text('Personal Expenses'),
-      );
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _startAddNewTransaction(context),
+        ),
+      ],
+      title: Text('Personal Expenses'),
+    );
+
+    final txListWidget = Container(
+        height: (mediaQuery.size.height -
+                appBar.preferredSize.height -
+                mediaQuery.padding.top) *
+            0.8,
+        child: TransactionList(_userTransactions, _removeTransaction));
+
+    /**
+     * Scaffold
+     */
     return Scaffold(
       appBar: appBar,
       // column contains children widgets
@@ -105,27 +125,46 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              if (isLandscape)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Show Chart"),
+                    Switch(
+                      value: _showChart,
+                      onChanged: (val) {
+                        setState(() {
+                          _showChart = val;
+                        });
+                      },
+                    ),
+                  ],
+                ),
               // you can wrap widgets in a parent such as container
               // you can use this to set certain properties on that specific widget
-              Container(
-                height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.3,
-                child: Chart(_recentTransactions)
-              ),
-              Container(
-                height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - - MediaQuery.of(context).padding.top) * 0.63,
-                child: TransactionList(
-                  _userTransactions, _removeTransaction
-                  )
-                ),
+
+              if (!isLandscape)
+                Container(
+                    height: (mediaQuery.size.height -
+                            appBar.preferredSize.height -
+                            mediaQuery.padding.top) *
+                        0.3,
+                    child: Chart(_recentTransactions)),
+
+              if (!isLandscape)
+                txListWidget,
+
+              if (isLandscape)
+                _showChart
+                    ? Container(
+                        height: (mediaQuery.size.height -
+                                appBar.preferredSize.height -
+                                mediaQuery.padding.top) *
+                            0.8,
+                        child: Chart(_recentTransactions))
+                    : txListWidget
             ]),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(
-      //     Icons.add,
-      //   ),
-      //   onPressed: () => _startAddNewTransaction(context),
-      // ),
     );
   }
 }

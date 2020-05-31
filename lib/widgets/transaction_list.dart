@@ -14,7 +14,8 @@ class TransactionList extends StatelessWidget {
     return Container(
       height: 450,
       child: userTransactions.isEmpty
-          ? Column(
+          ? LayoutBuilder(builder: (context, contraints) {
+            return Column(
               children: <Widget>[
                 Container(
                   alignment: Alignment.topLeft,
@@ -29,14 +30,15 @@ class TransactionList extends StatelessWidget {
                 Opacity(
                   opacity: 0.5,
                   child: Container(
-                      height: 250,
+                      height: contraints.maxHeight * 0.6,
                       child: Image.asset(
                         'assets/images/waiting.png',
                         fit: BoxFit.cover,
                       )),
                 ),
               ],
-            )
+            );
+          })
           : ListView.builder(
               itemBuilder: (context, index) {
                 return Card(
